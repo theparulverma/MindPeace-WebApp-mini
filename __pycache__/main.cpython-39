@@ -1,0 +1,80 @@
+a
+
+    V’1b½  ã                   @   s2  d dl mZmZmZmZmZ d dlmZ d dlmZ ee	ƒZ
+de
+jd< de
+jd< ee
+ƒZG dd	„ d	ej
+ƒZG d
+d„ dej
+ƒZe
+ d¡d
+d„ ƒZe
+ d¡dd„ ƒZe
+jddgddd„ ƒZe
+jdddgddd„ ƒZe
+ d¡dd„ ƒZe
+jdddgddd „ ƒZe
+jd!ddgdd"d#„ ƒZe	d$kr.e
+jd%d& d'S )(é    )ÚFlaskÚrender_templateÚredirectÚurl_forÚrequest)Údatetime)Ú
+SQLAlchemyzsqlite:///trackdb.sqlite3ZSQLALCHEMY_DATABASE_URIFZSQLALCHEMY_TRACK_MODIFICATIONSc                   @   s\   e Zd ZejejddZeje d¡dddZeje d¡ddZ	ej
+dd	d
+Zdd„ Zd
+S )ÚUserT©Zprimary_keyé   F)ZuniqueÚnullableé
+   ©r   ÚTrackerÚowner)Zbackrefc                 C   s   || _ || _d S ©N)ÚusernameÚpassword)Úselfr   r   © r   úAC:\Users\manub\Downloads\Telegram Desktop\Project\Project\main.pyÚ__init__   s    z
+User.__init__N)
+Ú__name__Ú
+__module__Ú__qualname__ÚdbÚColumnÚIntegerÚidÚStringr   r   ZrelationshipÚtrackersr   r   r   r   r   r	   	   s
+   r	   c                   @   sˆ   e Zd ZejejddZeje d¡ddZe e d¡¡Z	e e d¡¡Z
+ejejddZejeje 
+d¡ddZe ¡ fdd	„Zd
+S )r   Tr
+   é   Fr   éd   zuser.idc                 C   s"   || _ || _|| _|| _|| _d S r   )ÚnameÚtypeÚdescriptionÚlast_updateÚuser_id)r   r#   r$   r%   r'   r&   r   r   r   r      s
+    zTracker.__init__N)r   r   r   r   r   r   r   r   r#   r$   r%   ZDateTimer&   Z
+ForeignKeyr'   r   Únowr   r   r   r   r   r      s   r   ú/c                   C   s   t dƒS )Nz
+index.html)r   r   r   r   r   Úindex    s    r*   z/dashboard<username>c                 C   s:   t jj| d ¡ }tjj|jd ¡ }tdd| ||jdS )N©r   )r'   zdashboard.htmlZ	Dashboard)Útitler   r    r'   )r	   ÚqueryÚ	filter_byÚfirstr   r   Úallr   )r   ÚuserÚtr   r   r   Ú	dashboard$   s    r3   z/loginÚPOST)Úmethodsc                  C   sz   t jdkrvt jd } t jd }t| |ƒ}tjj| d ¡ }t|ƒdkrftj	 
+|¡ tj	 ¡  tj	 ¡  t
+td| dƒS d S )Nr4   r   r   r+   r   r3   )r   ÚmethodÚformr	   r-   r.   r0   Úlenr   ÚsessionÚaddÚcommitÚcloser   r   )r   r   Úur1   r   r   r   Úlogin,   s    
+
+
+
+
+
+r>   z/addtracker<user_id>ZGETc                 C   s”   t jj| d ¡ }|j}tjdkrˆtjd }tjd }tjd }t 	¡ }t
+|||| |ƒ}tj 
+|¡ tj ¡  tj ¡  ttd|dƒS td|dS )	N©r   r4   r#   r%   r$   r3   r+   zaddtracker.html)r	   r-   r.   r/   r   r   r6   r7   r   r(   r   r   r9   r:   r;   r<   r   r   r   )r'   ÚUr   r#   r%   r$   Údtr2   r   r   r   Útracker:   s    
+
+
+
+
+
+rB   z/delete<id>c                 C   sT   t jj| d ¡ }tjj|jd ¡ }t jj| d ¡  tj 	¡  t
+td|jdƒS )Nr?   r3   r+   )
+r   r-   r.   r/   r	   r'   Údeleter   r9   r;   r   r   r   )r   r2   r=   r   r   r   rC   P   s
+    
+rC   z	/edit<id>c                 C   s¼   t jj| d ¡ }tjj|jd ¡ }tjdkrªtj	 
+|¡ tj	 ¡  |r˜tjd }tjd }tjd }t
+ ¡ }t ||||j|ƒ}tj	 |¡ tj	 ¡  ttd|jdƒS td| |j|d	S )
+Nr?   r4   r#   r%   r$   r3   r+   z	edit.html)r   r   r2   )r   r-   r.   r/   r	   r'   r   r6   r   r9   rC   r;   r7   r   r(   r   r:   r   r   r   r   )r   r2   r=   r#   r%   r$   rA   r   r   r   ÚeditZ   s    
+
+
+
+
+
+rD   z/addlog<id>c                 C   sŒ   t jj| d ¡ }tjj|jd ¡ }tjdkrxt 	¡ }t |j
+|j|j|j
+|ƒ}tj |¡ tj ¡  ttd|jdƒS td| |j|j
+dS )Nr?   r4   r3   r+   zaddlog.html)r   r   r#   )r   r-   r.   r/   r	   r'   r   r6   r   r(   r#   r$   r%   r   r   r9   r:   r;   r   r   r   r   )r   r2   r=   rA   r   r   r   Úaddlogm   s    
+
+rE   Ú__main__T)ÚdebugN)Zflaskr   r   r   r   r   r   Zflask_sqlalchemyr   r   ZappZconfigr   ZModelr	   r   Zrouter*   r3   r>   rB   rC   rD   rE   Úrunr   r   r   r   Ú<module>   s0   
+
+
+
+
+
+
+
+
+
+
+
