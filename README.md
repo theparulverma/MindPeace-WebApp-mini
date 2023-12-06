@@ -1,1 +1,0 @@
-# MindPeace-WebApp-mini
